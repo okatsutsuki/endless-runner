@@ -18,11 +18,13 @@ public class character : MonoBehaviour
     public float groundRaycastDistance;
     public LayerMask groundLayerMask;
     private Animator anim;
+    private CharacterSoundController sound;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        sound = GetComponent<CharacterSoundController>();
     }
     void FixedUpdate()
     {
@@ -60,6 +62,7 @@ public class character : MonoBehaviour
             if (isOnGround)
             {
                 isJumping = true;
+                sound.PlayJump();
             }
         }
         anim.SetBool("is on ground", isOnGround);
