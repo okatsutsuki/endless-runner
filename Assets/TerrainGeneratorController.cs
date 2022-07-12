@@ -34,6 +34,7 @@ public class TerrainGeneratorController : MonoBehaviour
     }
     private List<GameObject> spawnedTerrain;
     private float lastGeneratedPositionX;
+    private float lastRemovedPositionX;
     void Start()
     {
         spawnedTerrain = new List<GameObject>();
@@ -62,12 +63,38 @@ public class TerrainGeneratorController : MonoBehaviour
         newTerrain.transform.position = new Vector2(posX, 0f);
         spawnedTerrain.Add(newTerrain);
     }
+    // Update is called once per frame
     void Update()
     {
         while (lastGeneratedPositionX < GetHorizontalPositionEnd())
         {
             GenerateTerrain(lastGeneratedPositionX);
             lastGeneratedPositionX += terrainTemplateWidth;
+        }
+        while (lastRemovedPositionX + terrainTemplateWidth <
+        GetHorizontalPositionStart())
+        {
+            lastRemovedPositionX += terrainTemplateWidth;
+            RemoveTerrain(lastRemovedPositionX);
+        }
+    }
+    private void RemoveTerrain(float posX)
+    {
+        GameObject terrainToRemove = null;
+        // find terrain at posX
+        foreach (GameObject item in spawnedTerrain)
+        {
+            if (item.transform.position.x == posX)
+            {
+                terrainToRemove = item;
+                break;
+            }
+        }
+        // after found;
+        if (terrainToRemove != null)
+        {
+            spawnedTerrain.Remove(terrainToRemove);
+            Destroy(terrainToRemove);
         }
     }
     [Header("Force Early Template")]
