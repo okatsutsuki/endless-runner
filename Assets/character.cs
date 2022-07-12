@@ -24,6 +24,13 @@ public class character : MonoBehaviour
     public ScoreController score;
     public float scoringRatio;
     private float lastPositionX;
+
+    [Header("GameOver")]
+    public float fallPositionY;
+    public GameObject gameOverScreen;
+
+    [Header("Camera")]
+    public camera gameCamera;
     // Start is called before the first frame update
     private void Start()
     {
@@ -79,5 +86,20 @@ public class character : MonoBehaviour
             score.IncreaseCurrentScore(scoreIncrement);
             lastPositionX += distancePassed;
         }
+        if (transform.position.y < fallPositionY)
+        {
+            GameOver();
+        }
+    }
+    private void GameOver()
+    {
+        // set high score
+        score.FinishScoring();
+        // stop camera movement
+        gameCamera.enabled = false;
+        // show gameover
+        gameOverScreen.SetActive(true);
+        // disable this too
+        this.enabled = false;
     }
 }
