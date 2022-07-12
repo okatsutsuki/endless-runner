@@ -19,6 +19,11 @@ public class character : MonoBehaviour
     public LayerMask groundLayerMask;
     private Animator anim;
     private CharacterSoundController sound;
+
+    [Header("Scoring")]
+    public ScoreController score;
+    public float scoringRatio;
+    private float lastPositionX;
     // Start is called before the first frame update
     private void Start()
     {
@@ -52,20 +57,6 @@ public class character : MonoBehaviour
         velocityVector.x = Mathf.Clamp(velocityVector.x + moveAccel * Time.deltaTime,
         0.0f, maxSpeed);
         rig.velocity = velocityVector;
-    }
-        // Update is called once per frame
-        void Update()
-    {
-        // read input
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (isOnGround)
-            {
-                isJumping = true;
-                sound.PlayJump();
-            }
-        }
-        anim.SetBool("is on ground", isOnGround);
     }
     private void Update()
     {
