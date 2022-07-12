@@ -710,6 +710,7 @@ GameObject:
   - component: {fileID: 1440181651}
   - component: {fileID: 1440181653}
   - component: {fileID: 1440181652}
+  - component: {fileID: 1440181654}
   m_Layer: 0
   m_Name: Ground container
   m_TagString: Untagged
@@ -774,6 +775,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1440181654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440181650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85ab4324bd6b554d9b08f15b66eda46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainTemplates: []
+  terrainTemplateWidth: 0
+  gameCamera: {fileID: 0}
+  areaStartOffset: 0
+  areaEndOffset: 0
 --- !u!1001 &3197711775005149808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -938,3 +956,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.28, y: 1.28}
   m_EdgeRadius: 0
+--- !u!1 &7680601465354726605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5113406076675696317, guid: be6b6fef44b2ee94c8ad94e62f40ee48, type: 3}
+  m_PrefabInstance: {fileID: 3197711775005149808}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7680601465354726606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7680601465354726605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a66d227d7c4278844b6eb5be430f2178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

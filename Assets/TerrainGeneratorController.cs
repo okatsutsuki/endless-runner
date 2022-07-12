@@ -32,4 +32,59 @@ public class TerrainGeneratorController : MonoBehaviour
         Debug.DrawLine(areaEndPosition + Vector3.up * debugLineHeight / 2,
         areaEndPosition + Vector3.down * debugLineHeight / 2, Color.red);
     }
+    private List<GameObject> spawnedTerrain;
+    private float lastGeneratedPositionX;
+    void Start()
+    {
+        spawnedTerrain = new List<GameObject>();
+        lastGeneratedPositionX = GetHorizontalPositionStart();
+        while (lastGeneratedPositionX < GetHorizontalPositionEnd())
+        {
+            GenerateTerrain(lastGeneratedPositionX);
+            lastGeneratedPositionX += terrainTemplateWidth;
+        }
+    }
+    private void GenerateTerrain(float posX, TerrainTemplateController forceterrain =
+    null)
+    {
+        GameObject item = null;
+        if (forceterrain == null)
+        {
+            item = terrainTemplates[Random.Range(0,
+
+            terrainTemplates.Count)].gameObject;
+        }
+        else
+        {
+            item = forceterrain.gameObject;
+        }
+        GameObject newTerrain = Instantiate(item, transform);
+        newTerrain.transform.position = new Vector2(posX, 0f);
+        spawnedTerrain.Add(newTerrain);
+    }
+    void Update()
+    {
+        while (lastGeneratedPositionX < GetHorizontalPositionEnd())
+        {
+            GenerateTerrain(lastGeneratedPositionX);
+            lastGeneratedPositionX += terrainTemplateWidth;
+        }
+    }
+    [Header("Force Early Template")]
+    public List<TerrainTemplateController> earlyTerrainTemplates;
+    void Start()
+    {
+        spawnedTerrain = new List<GameObject>();
+        lastGeneratedPositionX = GetHorizontalPositionStart();
+        foreach (TerrainTemplateController terrain in earlyTerrainTemplates)
+        {
+            GenerateTerrain(lastGeneratedPositionX, terrain);
+            lastGeneratedPositionX += terrainTemplateWidth;
+        }
+        while (lastGeneratedPositionX < GetHorizontalPositionEnd())
+        {
+            GenerateTerrain(lastGeneratedPositionX);
+            lastGeneratedPositionX += terrainTemplateWidth;
+        }
+    }
 }
