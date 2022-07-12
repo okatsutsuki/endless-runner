@@ -67,9 +67,26 @@ public class character : MonoBehaviour
         }
         anim.SetBool("is on ground", isOnGround);
     }
-    private void OnDrawGizmos()
+    private void Update()
     {
-        Debug.DrawLine(transform.position, transform.position + (Vector3.down *
-        groundRaycastDistance), Color.white);
+        // read input
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (isOnGround)
+            {
+                isJumping = true;
+                sound.PlayJump();
+            }
+        }
+        // change animation
+        anim.SetBool("isOnGround", isOnGround);
+        // calculate score
+        int distancePassed = Mathf.FloorToInt(transform.position.x - lastPositionX);
+        int scoreIncrement = Mathf.FloorToInt(distancePassed / scoringRatio);
+        if (scoreIncrement > 0)
+        {
+            score.IncreaseCurrentScore(scoreIncrement);
+            lastPositionX += distancePassed;
+        }
     }
 }
