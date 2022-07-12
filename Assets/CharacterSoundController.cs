@@ -14,5 +14,10 @@ public class CharacterSoundController : MonoBehaviour
     {
         audioPlayer.PlayOneShot(jump);
     }
+    public AudioClip scoreHighlight;
+    public void PlayScoreHighlight()
+    {
+        audioPlayer.PlayOneShot(scoreHighlight);
+    }
 }
 
